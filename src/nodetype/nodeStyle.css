@@ -1,0 +1,15 @@
+.node {
+    min-height: 35px;
+    min-width: 90px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.closeBtn {
+    color: red;
+    cursor: pointer;
+}

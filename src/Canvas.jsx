@@ -8,39 +8,43 @@ import {
     useEdgesState,
     addEdge,
 } from '@xyflow/react';
-
 import '@xyflow/react/dist/style.css';
+import InputNode from './nodetype/InputNode';
+import OutputNode from './nodetype/OutputNode';
+import MiddleNode from './nodetype/MiddleNode';
 
 const initialNodes = [
     {
         id: '1',
-        data: { label: 'Node 1' },
-        position: { x: 150, y: 0 },
+        type: 'IpNode',
+        data: { label: 'IPNode 1' },
+        position: { x: 100, y: 150 },
     },
     {
         id: '2',
-        data: { label: 'Node 2' },
-        position: { x: 0, y: 150 },
+        type: 'MdNode',
+        data: { label: 'MdNode 2' },
+        position: { x: 200, y: 250 },
     },
     {
         id: '3',
-        data: { label: 'Node 3' },
-        position: { x: 300, y: 150 },
+        type: 'OpNode',
+        data: { label: 'OPNode 3' },
+        position: { x: 300, y: 350 },
     },
 ];
 
 const initialEdges = [
-    { id: 'e1-2', source: '1', target: '2' },
-    // { id: 'e2-3', source: '1', target: '3' },
+    { id: 'e1-2', source: '1', target: '3'},
 ];
+
+const nodeTypes = { IpNode: InputNode, OpNode: OutputNode, MdNode: MiddleNode }
 
 const Canvas = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-    const onConnect = useCallback(
-        (params) => setEdges((eds) => addEdge(params, eds))
-        , [setEdges]);
+    const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
     return (
         <div style={{ width: '99vw', height: '97vh' }}>
@@ -50,12 +54,13 @@ const Canvas = () => {
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
+                nodeTypes={nodeTypes}
             >
                 <Controls />
                 <MiniMap />
                 <Background
                     variant="lines"
-                    color="cyan"
+                    color="#27a8ea38"
                     gap={12}
                     size={0.2} />
             </ReactFlow>
