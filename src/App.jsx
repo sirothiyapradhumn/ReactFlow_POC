@@ -1,11 +1,9 @@
-import { useState } from 'react'
+import Canvas from './Canvas'
 
 function App() {
 
   return (
-    <>
-      <div>APP COMPONENT</div>
-    </>
+    <Canvas />
   )
 }
 
