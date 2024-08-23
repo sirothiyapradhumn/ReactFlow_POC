@@ -7,6 +7,7 @@ import {
     useNodesState,
     useEdgesState,
     addEdge,
+    MarkerType,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import InputNode from './nodetype/InputNode';
@@ -35,8 +36,18 @@ const initialNodes = [
 ];
 
 const initialEdges = [
-    { id: 'e1-2', source: '1', target: '2'},
-    { id: 'e2-3', source: '2', target: '3', animated: true},
+    // { id: 'e1-2', source: '1', target: '2' },
+    // {
+    //     id: 'e2-3', source: '2',
+    //     target: '3',
+    //     // animated: true,
+    //     markerEnd: {
+    //         type: MarkerType.ArrowClosed,
+    //         width: 20,
+    //         height: 20,
+    //         color: 'black',
+    //     },
+    // },
 ];
 
 const nodeTypes = { IpNode: InputNode, OpNode: OutputNode, MdNode: MiddleNode }
@@ -45,7 +56,20 @@ const Canvas = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-    const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+    const onConnect = useCallback(
+        (params) => setEdges((eds) => {
+            const tempParam = {
+                ...params,
+                markerEnd: {
+                    type: MarkerType.ArrowClosed,
+                    width: 20,
+                    height: 20,
+                    color: 'black',
+                },
+            }
+            return addEdge(tempParam, eds);
+        })
+        ,[setEdges]);
 
     return (
         <div style={{ width: '99vw', height: '97vh' }}>
