@@ -1,9 +1,11 @@
 import Canvas from './Canvas'
+import { CanvasContextProvider } from './context/CanvasContext'
 
-function App() {
-
+const App = () => {
   return (
-    <Canvas />
+    <CanvasContextProvider>
+      <Canvas />
+    </CanvasContextProvider>
   )
 }
 
