@@ -1,7 +1,6 @@
 .node {
-    min-height: 35px;
-    min-width: 90px;
-    border: 1px solid black;
+    min-height: 38px;
+    min-width: 100px;
     background-color: white;
     border-radius: 5px;
     display: flex;
@@ -10,19 +9,18 @@
 }
 
 .closeBtn {
-    color: red;
     cursor: pointer;
+    font-size: 12px;
 }
 
 .inputNode {
-    background-color: #6ede87;
+    background-color: #0f4c97;
     color: white;
 }
 .middleNode {
-    background-color: #ffb700;
-    color: white;
+    border: 2px solid #78a042;
 }
 .outputNode {
-    background-color: #6865A5;
+    background-color: #009bba;
     color: white;
 }

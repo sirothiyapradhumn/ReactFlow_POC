@@ -18,20 +18,32 @@ const initialNodes = [
     {
         id: '1',
         type: 'IpNode',
-        data: { label: 'IPNode 1' },
+        data: { label: 'Table' },
         position: { x: 100, y: 150 },
     },
     {
         id: '2',
-        type: 'MdNode',
-        data: { label: 'MdNode 2' },
-        position: { x: 200, y: 250 },
+        type: 'IpNode',
+        data: { label: 'Table' },
+        position: { x: 100, y: 300 },
     },
     {
         id: '3',
+        type: 'MdNode',
+        data: { label: 'Join' },
+        position: { x: 300, y: 225 },
+    },
+    {
+        id: '4',
+        type: 'MdNode',
+        data: { label: 'Transform' },
+        position: { x: 500, y: 225 },
+    },
+    {
+        id: '5',
         type: 'OpNode',
-        data: { label: 'OPNode 3' },
-        position: { x: 300, y: 350 },
+        data: { label: 'Output' },
+        position: { x: 700, y: 225 },
     },
 ];
 
@@ -66,6 +78,10 @@ const Canvas = () => {
                     height: 20,
                     color: 'black',
                 },
+                style: {
+                    strokeWidth: 1,
+                    stroke: 'black',
+                  },
             }
             return addEdge(tempParam, eds);
         })

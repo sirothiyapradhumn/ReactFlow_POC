@@ -8,9 +8,9 @@ function InputNode({ data }) {
     <>
       <div className='node inputNode'>
         <div>{data.label}</div>
-        <span className='closeBtn' role='button'>
+        {/* <span className='closeBtn' role='button'>
           x
-        </span>
+        </span> */}
       </div>
       <Handle
         type="source"
