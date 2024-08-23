@@ -6,7 +6,7 @@ function MiddleNode({ data }) {
 
   return (
     <>
-      <div className='node'>
+      <div className='node middleNode'>
         <div>{data.label}</div>
         <span className='closeBtn' role='button'>
           x

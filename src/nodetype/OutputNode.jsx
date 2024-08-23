@@ -6,7 +6,7 @@ function OutputNode({ data }) {
 
   return (
     <>
-      <div className='node'>
+      <div className='node outputNode'>
         <div>{data.label}</div>
         <span className='closeBtn' role='button'>
           x

@@ -6,7 +6,7 @@ function InputNode({ data }) {
 
   return (
     <>
-      <div className='node'>
+      <div className='node inputNode'>
         <div>{data.label}</div>
         <span className='closeBtn' role='button'>
           x

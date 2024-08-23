@@ -13,3 +13,16 @@
     color: red;
     cursor: pointer;
 }
+
+.inputNode {
+    background-color: #6ede87;
+    color: white;
+}
+.middleNode {
+    background-color: #ffb700;
+    color: white;
+}
+.outputNode {
+    background-color: #6865A5;
+    color: white;
+}
