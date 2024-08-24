@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { Handle, Position } from '@xyflow/react';
-import './nodeStyle.css'
+import styles from './NodeStyle.module.css'
 
 function MiddleNode({ data }) {
 
   return (
     <>
-      <div className='node middleNode'>
+      <div className={`${styles.node} ${styles.middleNode} ${data?.searchHighlight && styles.search}`}>
         <div>{data.label}</div>
-        <span className='closeBtn' role='button'>
+        <span className={styles.closeBtn} role='button'>
           x
         </span>
       </div>

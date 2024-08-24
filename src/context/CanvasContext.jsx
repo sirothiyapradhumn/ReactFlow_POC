@@ -14,31 +14,31 @@ const initialNodes = [
   {
     id: '1',
     type: 'IpNode',
-    data: { label: 'Table' },
+    data: { label: 'Table', searchHighlight: false },
     position: { x: 100, y: 150 },
   },
   {
     id: '2',
     type: 'IpNode',
-    data: { label: 'Table' },
+    data: { label: 'Table', searchHighlight: false },
     position: { x: 100, y: 300 },
   },
   {
     id: '3',
     type: 'MdNode',
-    data: { label: 'Join' },
+    data: { label: 'Join', searchHighlight: false },
     position: { x: 300, y: 225 },
   },
   {
     id: '4',
     type: 'MdNode',
-    data: { label: 'Transform' },
+    data: { label: 'Transform', searchHighlight: false },
     position: { x: 500, y: 225 },
   },
   {
     id: '5',
     type: 'OpNode',
-    data: { label: 'Output' },
+    data: { label: 'Output', searchHighlight: false },
     position: { x: 700, y: 225 },
   },
 ];

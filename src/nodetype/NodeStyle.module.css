@@ -17,10 +17,31 @@
     background-color: #0f4c97;
     color: white;
 }
+
 .middleNode {
     border: 2px solid #78a042;
 }
+
 .outputNode {
     background-color: #009bba;
     color: white;
+}
+
+.search {
+    animation: border-pulse 1s 12 1.7s;
+    outline: none;
+}
+
+@keyframes border-pulse {
+    0% {
+        box-shadow: none;
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px #CCCCCC;
+    }
+
+    100% {
+        box-shadow: none;
+    }
 }
