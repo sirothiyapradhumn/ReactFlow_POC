@@ -6,6 +6,12 @@ import {
     Background,
     addEdge,
     MarkerType,
+    getConnectedEdges,
+    getIncomers,
+    getStraightPath,
+    getSimpleBezierPath,
+    Position,
+    getOutgoers,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import InputNode from './nodetype/InputNode';
@@ -36,6 +42,67 @@ const Canvas = () => {
             return addEdge(tempParam, eds);
         })
         ,[setEdges]);
+
+        const connectedEdges = getConnectedEdges(nodes, edges);
+        console.log('getConnectedEdges', connectedEdges)
+
+        const incomers = getIncomers(
+            {
+                id: '3',
+                type: 'MdNode',
+                data: { label: 'JoinT1T2', searchHighlight: false },
+                position: { x: 300, y: 225 },
+              },
+            nodes,
+            edges,
+          );
+        console.log('incomers', incomers)
+
+        const outgoers = getOutgoers(
+            {
+                id: '3',
+                type: 'MdNode',
+                data: { label: 'JoinT1T2', searchHighlight: false },
+                position: { x: 300, y: 225 },
+            },
+            nodes,
+            edges,
+          );
+
+          console.log('outgoers', outgoers);
+
+          const findEdgesBetweenNodes = (allEdges, startNode, endNode) => {
+            return allEdges.filter(
+                (edge) =>
+                    (edge.source === startNode && edge.target === endNode) ||
+                    (edge.source === endNode && edge.target === startNode)
+            );
+          };
+
+          const edges3ToLast = findEdgesBetweenNodes(edges, '3', '5');
+          console.log('edges3ToLast', edges3ToLast);
+
+        // const [path, labelX, labelY, offsetX, offsetY] = getStraightPath({
+        //     sourceX: 300,
+        //     sourceY: 225,
+        //     targetX: 700,
+        //     targetY: 225,
+        //   });
+
+        // const [path, labelX, labelY, offsetX, offsetY] = getSimpleBezierPath({
+        //     sourceX: 300,
+        //     sourceY: 225,
+        //     sourcePosition: Position.Right,
+        //     targetX: 700,
+        //     targetY: 225,
+        //     targetPosition: Position.Left,
+        //   });
+
+        //   console.log("path", path);
+        //   console.log("labelX", labelX);
+        //   console.log("labelY", labelY);
+        //   console.log("offsetX", offsetX);
+        //   console.log("offsetY", offsetY);
 
     return (
         <div style={{ width: '99vw', height: '97vh' }}>
