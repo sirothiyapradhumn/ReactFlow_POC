@@ -28,7 +28,7 @@
 }
 
 .search {
-    animation: border-pulse 1s 12 1.7s;
+    animation: border-pulse 1s 6 0.2s;
     outline: none;
 }
 

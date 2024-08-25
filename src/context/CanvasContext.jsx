@@ -14,19 +14,19 @@ const initialNodes = [
   {
     id: '1',
     type: 'IpNode',
-    data: { label: 'Table', searchHighlight: false },
+    data: { label: 'Table1', searchHighlight: false },
     position: { x: 100, y: 150 },
   },
   {
     id: '2',
     type: 'IpNode',
-    data: { label: 'Table', searchHighlight: false },
+    data: { label: 'Table2', searchHighlight: false },
     position: { x: 100, y: 300 },
   },
   {
     id: '3',
     type: 'MdNode',
-    data: { label: 'Join', searchHighlight: false },
+    data: { label: 'JoinT1T2', searchHighlight: false },
     position: { x: 300, y: 225 },
   },
   {
