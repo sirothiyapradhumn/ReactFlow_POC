@@ -65,12 +65,6 @@ export const allFlowList = [
                 position: { x: 240, y: 229 },
             },
             {
-                id: '4',
-                type: 'MdNode',
-                data: { label: 'Transform', searchHighlight: false },
-                position: { x: 518, y: 227 },
-            },
-            {
                 id: '5',
                 type: 'OpNode',
                 data: { label: 'Output', searchHighlight: false },
@@ -118,12 +112,6 @@ export const allFlowList = [
                 type: 'IpNode',
                 data: { label: 'Table1', searchHighlight: false },
                 position: { x: 51, y: 65 },
-            },
-            {
-                id: '2',
-                type: 'IpNode',
-                data: { label: 'Table2', searchHighlight: false },
-                position: { x: 51, y: 414 },
             },
             {
                 id: '3',
