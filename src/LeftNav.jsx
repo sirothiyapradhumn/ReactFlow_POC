@@ -3,7 +3,7 @@ import styles from './index.module.css';
 import CanvasContext from './context/CanvasContext';
 import { allFlowList } from './mock';
 
-const LeftHeader = () => {
+const LeftNav = () => {
     const { nodes, setNodes, setEdges } = useContext(CanvasContext);
     const onStepClick = (nodeId) => {
         setNodes((prevNodes) => {
@@ -28,10 +28,10 @@ const LeftHeader = () => {
         })
     };
 
-    const onflowClick = (flow) => {
+    const onFlowDrag = (flow) => {
         setNodes(flow.nodes);
         setEdges(flow.edges);
-    }
+    };
 
     return (
         <div className={styles.leftHeader}>
@@ -62,7 +62,7 @@ const LeftHeader = () => {
                                 key={ele.flow}
                                 className={styles.nodeName}
                                 draggable="true"
-                                onDragEnd={() => onflowClick(ele)}
+                                onDragEnd={() => onFlowDrag(ele)}
                             >
                                 {ele.flow}
                             </div>
@@ -75,4 +75,4 @@ const LeftHeader = () => {
     )
 };
 
-export default LeftHeader;
+export default LeftNav;

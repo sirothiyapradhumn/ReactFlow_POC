@@ -1,5 +1,5 @@
 import Canvas from './Canvas'
-import LeftHeader from './LeftHeader'
+import LeftNav from './LeftNav'
 import { CanvasContextProvider } from './context/CanvasContext'
 import styles from './index.module.css';
 
@@ -7,7 +7,7 @@ const App = () => {
   return (
     <CanvasContextProvider>
       <div className={styles.canvasModule}>
-        <LeftHeader/>
+        <LeftNav/>
         <Canvas />
       </div>
     </CanvasContextProvider>
