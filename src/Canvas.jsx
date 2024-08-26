@@ -26,7 +26,7 @@ const canvasStyle = {
 };
 
 const Canvas = () => {
-    const {nodes, onNodesChange, edges, setEdges, onEdgesChange} = useContext(CanvasContext);
+    const { nodes, onNodesChange, edges, setEdges, onEdgesChange } = useContext(CanvasContext);
 
     const onConnect = useCallback(
         (params) => setEdges((eds) => {
@@ -45,75 +45,76 @@ const Canvas = () => {
             }
             return addEdge(tempParam, eds);
         })
-        ,[setEdges]);
+        , [setEdges]);
 
-        const connectedEdges = getConnectedEdges(nodes, edges);
-        console.log('getConnectedEdges', connectedEdges)
+    const connectedEdges = getConnectedEdges(nodes, edges);
+    console.log('getConnectedEdges', connectedEdges)
 
-        const incomers = getIncomers(
-            {
-                id: '3',
-                type: 'MdNode',
-                data: { label: 'JoinT1T2', searchHighlight: false },
-                position: { x: 300, y: 225 },
-              },
-            nodes,
-            edges,
-          );
-        console.log('incomers', incomers)
+    const incomers = getIncomers(
+        {
+            id: '3',
+            type: 'MdNode',
+            data: { label: 'JoinT1T2', searchHighlight: false },
+            position: { x: 300, y: 225 },
+        },
+        nodes,
+        edges,
+    );
+    console.log('incomers', incomers)
 
-        const outgoers = getOutgoers(
-            {
-                id: '3',
-                type: 'MdNode',
-                data: { label: 'JoinT1T2', searchHighlight: false },
-                position: { x: 300, y: 225 },
-            },
-            nodes,
-            edges,
-          );
+    const outgoers = getOutgoers(
+        {
+            id: '3',
+            type: 'MdNode',
+            data: { label: 'JoinT1T2', searchHighlight: false },
+            position: { x: 300, y: 225 },
+        },
+        nodes,
+        edges,
+    );
 
-          console.log('outgoers', outgoers);
+    console.log('outgoers', outgoers);
 
-          const findEdgesBetweenNodes = (allEdges, startNode, endNode) => {
-            return allEdges.filter(
-                (edge) =>
-                    (edge.source === startNode && edge.target === endNode) ||
-                    (edge.source === endNode && edge.target === startNode)
-            );
-          };
+    const findEdgesBetweenNodes = (allEdges, startNode, endNode) => {
+        return allEdges.filter(
+            (edge) =>
+                (edge.source === startNode && edge.target === endNode) ||
+                (edge.source === endNode && edge.target === startNode)
+        );
+    };
 
-          const edges3ToLast = findEdgesBetweenNodes(edges, '3', '5');
-          console.log('edges3ToLast', edges3ToLast);
+    const edges3ToLast = findEdgesBetweenNodes(edges, '3', '5');
+    console.log('edges3ToLast', edges3ToLast);
 
-        // const [path, labelX, labelY, offsetX, offsetY] = getStraightPath({
-        //     sourceX: 300,
-        //     sourceY: 225,
-        //     targetX: 700,
-        //     targetY: 225,
-        //   });
+    // const [path, labelX, labelY, offsetX, offsetY] = getStraightPath({
+    //     sourceX: 300,
+    //     sourceY: 225,
+    //     targetX: 700,
+    //     targetY: 225,
+    //   });
 
-        // const [path, labelX, labelY, offsetX, offsetY] = getSimpleBezierPath({
-        //     sourceX: 300,
-        //     sourceY: 225,
-        //     sourcePosition: Position.Right,
-        //     targetX: 700,
-        //     targetY: 225,
-        //     targetPosition: Position.Left,
-        //   });
+    // const [path, labelX, labelY, offsetX, offsetY] = getSimpleBezierPath({
+    //     sourceX: 300,
+    //     sourceY: 225,
+    //     sourcePosition: Position.Right,
+    //     targetX: 700,
+    //     targetY: 225,
+    //     targetPosition: Position.Left,
+    //   });
 
-        //   console.log("path", path);
-        //   console.log("labelX", labelX);
-        //   console.log("labelY", labelY);
-        //   console.log("offsetX", offsetX);
-        //   console.log("offsetY", offsetY);
+    //   console.log("path", path);
+    //   console.log("labelX", labelX);
+    //   console.log("labelY", labelY);
+    //   console.log("offsetX", offsetX);
+    //   console.log("offsetY", offsetY);
 
-        useEffect(() => {
-            // highlightMock
+    useEffect(() => {
+        // highlightMock
+        if (highlightMock.length > 0) {
             setEdges((prevEdge) => {
                 return prevEdge.map((ed) => {
                     const findEdIdx = highlightMock.findIndex((ele) => ele.id === ed.id);
-                    if(findEdIdx > -1) {
+                    if (findEdIdx > -1) {
                         return {
                             ...ed,
                             style: {
@@ -125,7 +126,8 @@ const Canvas = () => {
                     return ed;
                 })
             })
-        }, [highlightMock])
+        }
+    }, [highlightMock])
 
     return (
         <div style={{ width: '99vw', height: '97vh' }}>

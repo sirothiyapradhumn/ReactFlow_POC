@@ -419,4 +419,31 @@ export const allFlowList = [
             },
         ],
     },
-]
+];
+
+export const allSources = [
+    {
+        type: 'IpNode',
+        data: { label: 'Table3', searchHighlight: false },
+    },
+    {
+        type: 'IpNode',
+        data: { label: 'Table4', searchHighlight: false },
+    },
+    {
+        type: 'IpNode',
+        data: { label: 'Table5', searchHighlight: false },
+    },
+    {
+        type: 'IpNode',
+        data: { label: 'Table6', searchHighlight: false },
+    },
+    {
+        type: 'IpNode',
+        data: { label: 'Table7', searchHighlight: false },
+    },
+    {
+        type: 'IpNode',
+        data: { label: 'Table8', searchHighlight: false },
+    },
+];
