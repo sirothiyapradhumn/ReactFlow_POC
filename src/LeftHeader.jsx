@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import styles from './index.module.css';
 import CanvasContext from './context/CanvasContext';
+import { allFlowList } from './mock';
 
 const LeftHeader = () => {
-    const { nodes, setNodes } = useContext(CanvasContext);
+    const { nodes, setNodes, setEdges } = useContext(CanvasContext);
     const onStepClick = (nodeId) => {
         setNodes((prevNodes) => {
             return prevNodes.map((ele) => {
@@ -27,23 +28,49 @@ const LeftHeader = () => {
         })
     };
 
+    const onflowClick = (flow) => {
+        setNodes(flow.nodes);
+        setEdges(flow.edges);
+    }
+
     return (
         <div className={styles.leftHeader}>
             <div className={styles.gotoHead}>Go to Step</div>
-            {
-                nodes.map((ele) => {
-                    return (
-                        <div
-                            key={ele.id}
-                            className={styles.nodeName}
-                            role='button'
-                            onClick={() => onStepClick(ele.id)}
-                        >
-                            {ele.data.label}
-                        </div>
-                    )
-                })
-            }
+            <div className={styles.listBox}>
+                {
+                    nodes.map((ele) => {
+                        return (
+                            <div
+                                key={ele.id}
+                                className={styles.nodeName}
+                                role='button'
+                                onClick={() => onStepClick(ele.id)}
+                            >
+                                {ele.data.label}
+                            </div>
+                        )
+                    })
+                }
+            </div>
+
+            <div className={styles.gotoHead}>All Flows</div>
+            <div className={styles.listBox}>
+                {
+                    allFlowList.map((ele) => {
+                        return (
+                            <div
+                                key={ele.flow}
+                                className={styles.nodeName}
+                                draggable="true"
+                                onDragEnd={() => onflowClick(ele)}
+                            >
+                                {ele.flow}
+                            </div>
+                        )
+                    })
+                }
+            </div>
+
         </div>
     )
 };
