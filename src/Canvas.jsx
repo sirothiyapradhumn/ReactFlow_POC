@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import {
     ReactFlow,
     MiniMap,
@@ -18,8 +18,12 @@ import InputNode from './nodetype/InputNode';
 import OutputNode from './nodetype/OutputNode';
 import MiddleNode from './nodetype/MiddleNode';
 import CanvasContext from './context/CanvasContext';
+import { highlightMock } from './mock';
 
 const nodeTypes = { IpNode: InputNode, OpNode: OutputNode, MdNode: MiddleNode }
+const canvasStyle = {
+    backgroundColor: '#effaff',
+};
 
 const Canvas = () => {
     const {nodes, onNodesChange, edges, setEdges, onEdgesChange} = useContext(CanvasContext);
@@ -104,6 +108,25 @@ const Canvas = () => {
         //   console.log("offsetX", offsetX);
         //   console.log("offsetY", offsetY);
 
+        useEffect(() => {
+            // highlightMock
+            setEdges((prevEdge) => {
+                return prevEdge.map((ed) => {
+                    const findEdIdx = highlightMock.findIndex((ele) => ele.id === ed.id);
+                    if(findEdIdx > -1) {
+                        return {
+                            ...ed,
+                            style: {
+                                ...ed.style,
+                                stroke: "#0fff4f"
+                            }
+                        }
+                    }
+                    return ed;
+                })
+            })
+        }, [highlightMock])
+
     return (
         <div style={{ width: '99vw', height: '97vh' }}>
             <ReactFlow
@@ -113,14 +136,15 @@ const Canvas = () => {
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
                 nodeTypes={nodeTypes}
+                style={canvasStyle}
             >
                 <Controls />
                 <MiniMap />
-                <Background
+                {/* <Background
                     variant="lines"
                     color="#27a8ea38"
                     gap={12}
-                    size={0.2} />
+                    size={0.2} /> */}
             </ReactFlow>
         </div>
     );
