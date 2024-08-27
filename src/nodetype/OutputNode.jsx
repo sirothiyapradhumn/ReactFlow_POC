@@ -1,14 +1,26 @@
-import { useCallback } from 'react';
+import { useContext } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import styles from './NodeStyle.module.css'
+import CanvasContext from '../context/CanvasContext';
 
-function OutputNode({ data }) {
+function OutputNode({ data, id }) {
+  const { setNodes } = useContext(CanvasContext);
+
+  const onDeleteNode = () => {
+    setNodes((prevNds) => {
+      const tempNds = [...prevNds];
+      return tempNds.filter((node) => node.id !== id);
+    })
+  }
 
   return (
     <>
       <div className={`${styles.node} ${styles.outputNode} ${data?.searchHighlight && styles.search}`}>
         <div>{data.label}</div>
-        <span className={styles.closeBtn} role='button'>
+        <span
+          className={styles.closeBtn}
+          onClick={() => onDeleteNode()}
+          role='button'>
           x
         </span>
       </div>
