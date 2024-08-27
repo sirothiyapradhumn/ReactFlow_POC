@@ -17,12 +17,15 @@ function MiddleNode({ data, id }) {
     <>
       <div className={`${styles.node} ${styles.middleNode} ${data?.searchHighlight && styles.search}`}>
         <div>{data.label}</div>
-        <span
-          className={styles.closeBtn}
-          onClick={() => onDeleteNode()}
-          role='button'>
-          x
-        </span>
+        <div style={{ display: 'flex' }}>
+          <span
+            className={styles.closeBtn}
+            onClick={() => onDeleteNode()}
+            role='button'>
+            x
+          </span>
+          <div className={styles.addBtn}>&#43;</div>
+        </div>
       </div>
       <Handle
         type="source"

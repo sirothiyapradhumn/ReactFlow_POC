@@ -5,7 +5,8 @@
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
-    padding: 5px;
+    padding: 5px; 
+    position: relative;
 }
 
 .closeBtn {
@@ -25,6 +26,20 @@
 .outputNode {
     background-color: #009bba;
     color: white;
+}
+
+.addBtn {
+    position: relative;
+    left: 20px;
+    bottom: 7px;
+    color: black;
+    opacity: 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.addBtn:hover{
+    opacity: 1;
 }
 
 .search {

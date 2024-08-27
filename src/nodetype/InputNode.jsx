@@ -8,6 +8,7 @@ function InputNode({ data }) {
     <>
       <div className={`${styles.node} ${styles.inputNode} ${data?.searchHighlight && styles.search}`}>
         <div>{data.label}</div>
+        <div className={styles.addBtn}>&#43;</div>
       </div>
       <Handle
         type="source"
