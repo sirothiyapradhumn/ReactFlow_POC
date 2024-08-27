@@ -60,3 +60,9 @@
         box-shadow: none;
     }
 }
+
+.actionBox {
+    position: absolute;
+    left: 120%;
+    top: 0%;
+}

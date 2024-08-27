@@ -1,9 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import styles from './NodeStyle.module.css'
 import CanvasContext from '../context/CanvasContext';
+import Action from '../Actions';
 
 function MiddleNode({ data, id }) {
+  const [actionToggle, setActionToggle] = useState(false);
   const { setNodes } = useContext(CanvasContext);
 
   const onDeleteNode = () => {
@@ -11,7 +13,22 @@ function MiddleNode({ data, id }) {
       const tempNds = [...prevNds];
       return tempNds.filter((node) => node.id !== id);
     })
-  }
+  };
+
+  const actionConfig = [
+    {
+      id: 1,
+      label: 'Transform'
+    },
+    {
+      id: 2,
+      label: 'Join'
+    },
+    {
+      id: 3,
+      label: 'Output'
+    }
+  ];
 
   return (
     <>
@@ -24,8 +41,17 @@ function MiddleNode({ data, id }) {
             role='button'>
             x
           </span>
-          <div className={styles.addBtn}>&#43;</div>
+          <div 
+            className={styles.addBtn}
+            onClick={() => setActionToggle((prev) => !prev)}
+          >&#43;
+          </div>
         </div>
+      </div>
+      <div className={styles.actionBox}>
+        {
+          actionToggle && <Action btnConfig={actionConfig} />
+        }
       </div>
       <Handle
         type="source"

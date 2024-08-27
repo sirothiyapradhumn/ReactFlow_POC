@@ -22,3 +22,15 @@
 .listBox {
     padding-bottom: 20px;
 }
+
+.actionContainer {
+    border: 1px solid black;
+    background: white;
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.actBtn {
+    cursor: pointer;
+}
