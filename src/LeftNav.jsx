@@ -2,9 +2,11 @@ import React, { useContext, useRef } from 'react';
 import styles from './index.module.css';
 import CanvasContext from './context/CanvasContext';
 import { allFlowList, allSources } from './mock';
+import { useReactFlow } from '@xyflow/react';
 
 const LeftNav = () => {
     const { nodes, setNodes, setEdges } = useContext(CanvasContext);
+    const { screenToFlowPosition } = useReactFlow();
     const yPos = useRef(500);
 
     const onStepClick = (nodeId) => {
@@ -35,12 +37,15 @@ const LeftNav = () => {
         setEdges(flow.edges);
     };
 
-    const onSourceDrag = (src) => {
-        yPos.current += 50;
+    const onSourceDrag = (event, src) => {
+        const position = screenToFlowPosition({
+            x: event.clientX,
+            y: event.clientY,
+          });
         setNodes((prevNds) => {
             const tempSrc = {
                 ...src,
-                position: { x: 51, y: yPos.current },
+                position,
                 id: (Math.floor(Math.random() * 10000) + 10000).toString().substring(1),
             }
             return [
@@ -97,7 +102,7 @@ const LeftNav = () => {
                                 key={ele.id}
                                 className={styles.nodeName}
                                 draggable="true"
-                                onDragEnd={() => onSourceDrag(ele)}
+                                onDragEnd={(e) => onSourceDrag(e, ele)}
                             >
                                 {ele.data.label}
                             </div>
