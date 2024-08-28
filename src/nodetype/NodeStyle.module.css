@@ -72,4 +72,6 @@
     max-width: 100px;
     margin-right: 3px;
     font-size: 12px;
+    max-height: 100%;
+    overflow: auto;
 }

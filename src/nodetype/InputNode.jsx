@@ -4,7 +4,7 @@ import styles from './NodeStyle.module.css'
 import Action from '../Actions';
 import CanvasContext from '../context/CanvasContext';
 
-const InputNode = ({ data, positionAbsoluteX, positionAbsoluteY }) => {
+const InputNode = ({ data, id, positionAbsoluteX, positionAbsoluteY }) => {
   const [actionToggle, setActionToggle] = useState(false);
   const { setNewNodeType } = useContext(CanvasContext);
 
@@ -12,7 +12,8 @@ const InputNode = ({ data, positionAbsoluteX, positionAbsoluteY }) => {
     setNewNodeType({
       type: ndType,
       ndName: `${data.label} ${ndName}`,
-      position: { x: positionAbsoluteX + 150, y: positionAbsoluteY},
+      position: { x: positionAbsoluteX + 200, y: positionAbsoluteY},
+      srcId: id,
     });
     setActionToggle(false);
   };

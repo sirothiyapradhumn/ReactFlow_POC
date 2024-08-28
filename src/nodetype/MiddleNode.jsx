@@ -19,7 +19,8 @@ const MiddleNode = ({ data, id, positionAbsoluteX, positionAbsoluteY}) => {
     setNewNodeType({
       type: ndType,
       ndName: `${data.label} ${ndName}`,
-      position: { x: positionAbsoluteX + 150, y: positionAbsoluteY},
+      position: { x: positionAbsoluteX + 200, y: positionAbsoluteY},
+      srcId: id,
     });
     setActionToggle(false);
   };

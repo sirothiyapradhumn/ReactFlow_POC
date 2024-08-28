@@ -160,6 +160,7 @@ export const CanvasContextProvider = ({ children }) => {
     type: '',
     ndName: '',
     position: {},
+    srcId: '',
   });
 
   const value = useMemo(() => ({

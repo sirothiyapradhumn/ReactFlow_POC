@@ -139,9 +139,10 @@ const Canvas = () => {
 
     useEffect(() => {
         if (newNodeType.type) {
+            const randomId  = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
             setNodes((prevNds) => {
                 const tempNd = {
-                    id: (Math.floor(Math.random() * 10000) + 10000).toString().substring(1),
+                    id: randomId,
                     type: newNodeType.type,
                     data: { label: newNodeType.ndName, searchHighlight: false },
                     position: newNodeType.position,
@@ -151,6 +152,27 @@ const Canvas = () => {
                     tempNd
                 ]
             });
+            setEdges((prevEds) => {
+                const tempEdg =   {
+                    id: `e${newNodeType.srcId}-${randomId}`,
+                    source: newNodeType.srcId,
+                    target: randomId,
+                    markerEnd: {
+                      type: MarkerType.ArrowClosed,
+                      width: 20,
+                      height: 20,
+                      color: 'black',
+                    },
+                    style: {
+                      strokeWidth: 1,
+                      stroke: "black"
+                    },
+                  };
+                return [
+                    ...prevEds,
+                    tempEdg
+                ]
+            })
         }
     }, [newNodeType])
 
