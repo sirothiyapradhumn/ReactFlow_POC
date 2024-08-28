@@ -8,7 +8,13 @@ const Action = ({ btnConfig }) => {
             {
                 btnConfig.map((btn) => {
                     return (
-                        <div className={styles.actBtn} key={btn.id}>{btn.label}</div>
+                        <div
+                            className={styles.actBtn}
+                            key={btn.id}
+                            onClick={btn.onClick}
+                        >
+                            {btn.label}
+                        </div>
                     );
                 })
             }

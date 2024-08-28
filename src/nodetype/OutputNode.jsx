@@ -16,7 +16,7 @@ function OutputNode({ data, id }) {
   return (
     <>
       <div className={`${styles.node} ${styles.outputNode} ${data?.searchHighlight && styles.search}`}>
-        <div>{data.label}</div>
+        <div className={styles.ndlabel}>{data.label}</div>
         <span
           className={styles.closeBtn}
           onClick={() => onDeleteNode()}

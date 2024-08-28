@@ -26,7 +26,15 @@ const canvasStyle = {
 };
 
 const Canvas = () => {
-    const { nodes, onNodesChange, edges, setEdges, onEdgesChange } = useContext(CanvasContext);
+    const {
+        nodes,
+        onNodesChange,
+        edges,
+        setEdges,
+        onEdgesChange,
+        newNodeType,
+        setNodes,
+    } = useContext(CanvasContext);
 
     const onConnect = useCallback(
         (params) => setEdges((eds) => {
@@ -127,7 +135,24 @@ const Canvas = () => {
                 })
             })
         }
-    }, [highlightMock])
+    }, [highlightMock]);
+
+    useEffect(() => {
+        if (newNodeType.type) {
+            setNodes((prevNds) => {
+                const tempNd = {
+                    id: (Math.floor(Math.random() * 10000) + 10000).toString().substring(1),
+                    type: newNodeType.type,
+                    data: { label: newNodeType.ndName, searchHighlight: false },
+                    position: newNodeType.position,
+                };
+                return [
+                    ...prevNds,
+                    tempNd
+                ]
+            });
+        }
+    }, [newNodeType])
 
     return (
         <div style={{ width: '99vw', height: '97vh' }}>

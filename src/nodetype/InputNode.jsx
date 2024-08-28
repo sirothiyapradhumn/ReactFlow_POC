@@ -1,25 +1,39 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import styles from './NodeStyle.module.css'
 import Action from '../Actions';
+import CanvasContext from '../context/CanvasContext';
 
-const InputNode = ({ data }) => {
+const InputNode = ({ data, positionAbsoluteX, positionAbsoluteY }) => {
   const [actionToggle, setActionToggle] = useState(false);
+  const { setNewNodeType } = useContext(CanvasContext);
+
+  const onActionClick = (ndType, ndName) => {
+    setNewNodeType({
+      type: ndType,
+      ndName: `${data.label} ${ndName}`,
+      position: { x: positionAbsoluteX + 150, y: positionAbsoluteY},
+    });
+    setActionToggle(false);
+  };
+
   const actionConfig = [
     {
       id: 1,
-      label: 'Transform'
+      label: 'Transform',
+      onClick: () => onActionClick('MdNode', 'Transform'),
     },
     {
       id: 2,
-      label: 'Join'
+      label: 'Join',
+      onClick: () => onActionClick('MdNode', 'Join'),
     }
   ];
 
   return (
     <>
       <div className={`${styles.node} ${styles.inputNode} ${data?.searchHighlight && styles.search}`}>
-        <div>{data.label}</div>
+        <div className={styles.ndlabel}>{data.label}</div>
         <div
           className={styles.addBtn}
           onClick={() => setActionToggle((prev) => !prev)}

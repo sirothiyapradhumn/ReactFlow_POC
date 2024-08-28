@@ -4,9 +4,9 @@ import styles from './NodeStyle.module.css'
 import CanvasContext from '../context/CanvasContext';
 import Action from '../Actions';
 
-function MiddleNode({ data, id }) {
+const MiddleNode = ({ data, id, positionAbsoluteX, positionAbsoluteY}) => {
   const [actionToggle, setActionToggle] = useState(false);
-  const { setNodes } = useContext(CanvasContext);
+  const { setNodes, setNewNodeType } = useContext(CanvasContext);
 
   const onDeleteNode = () => {
     setNodes((prevNds) => {
@@ -15,25 +15,37 @@ function MiddleNode({ data, id }) {
     })
   };
 
+  const onActionClick = (ndType, ndName) => {
+    setNewNodeType({
+      type: ndType,
+      ndName: `${data.label} ${ndName}`,
+      position: { x: positionAbsoluteX + 150, y: positionAbsoluteY},
+    });
+    setActionToggle(false);
+  };
+
   const actionConfig = [
     {
       id: 1,
-      label: 'Transform'
+      label: 'Transform',
+      onClick: () => onActionClick('MdNode', 'Transform'),
     },
     {
       id: 2,
-      label: 'Join'
+      label: 'Join',
+      onClick: () => onActionClick('MdNode', 'Join'),
     },
     {
       id: 3,
-      label: 'Output'
+      label: 'Output',
+      onClick: () => onActionClick('OpNode', 'Output'),
     }
   ];
 
   return (
     <>
       <div className={`${styles.node} ${styles.middleNode} ${data?.searchHighlight && styles.search}`}>
-        <div>{data.label}</div>
+        <div className={styles.ndlabel}>{data.label}</div>
         <div style={{ display: 'flex' }}>
           <span
             className={styles.closeBtn}

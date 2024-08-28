@@ -1,5 +1,6 @@
 .node {
-    min-height: 38px;
+    min-height: 40px;
+    max-height: 40px;
     min-width: 100px;
     background-color: white;
     border-radius: 5px;
@@ -65,4 +66,10 @@
     position: absolute;
     left: 120%;
     top: 0%;
+}
+
+.ndlabel {
+    max-width: 100px;
+    margin-right: 3px;
+    font-size: 12px;
 }
