@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Handle, Position } from '@xyflow/react';
+import { Handle, Position, useReactFlow } from '@xyflow/react';
 import styles from './NodeStyle.module.css'
 import CanvasContext from '../context/CanvasContext';
 import Action from '../Actions';
@@ -7,6 +7,7 @@ import Action from '../Actions';
 const MiddleNode = ({ data, id, positionAbsoluteX, positionAbsoluteY}) => {
   const [actionToggle, setActionToggle] = useState(false);
   const { setNodes, setNewNodeType } = useContext(CanvasContext);
+  const { screenToFlowPosition } = useReactFlow();
 
   const onDeleteNode = () => {
     setNodes((prevNds) => {
@@ -16,10 +17,14 @@ const MiddleNode = ({ data, id, positionAbsoluteX, positionAbsoluteY}) => {
   };
 
   const onActionClick = (ndType, ndName) => {
+    const position = screenToFlowPosition({
+      x: positionAbsoluteX + 150,
+      y: positionAbsoluteY,
+    });
     setNewNodeType({
       type: ndType,
       ndName: `${data.label} ${ndName}`,
-      position: { x: positionAbsoluteX + 200, y: positionAbsoluteY},
+      position,
       srcId: id,
     });
     setActionToggle(false);
