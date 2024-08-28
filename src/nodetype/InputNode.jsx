@@ -10,10 +10,10 @@ const InputNode = ({ data, id, positionAbsoluteX, positionAbsoluteY }) => {
   const { screenToFlowPosition } = useReactFlow();
 
   const onActionClick = (ndType, ndName) => {
-    const position = screenToFlowPosition({
+    const position = {
       x: positionAbsoluteX + 150,
       y: positionAbsoluteY,
-    });
+    };
     setNewNodeType({
       type: ndType,
       ndName: `${data.label} ${ndName}`,
