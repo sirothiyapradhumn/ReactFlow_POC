@@ -12,6 +12,7 @@ import {
     getSimpleBezierPath,
     Position,
     getOutgoers,
+    useReactFlow,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import InputNode from './nodetype/InputNode';
@@ -34,7 +35,10 @@ const Canvas = () => {
         onEdgesChange,
         newNodeType,
         setNodes,
+        srcDrop,
     } = useContext(CanvasContext);
+
+    const { screenToFlowPosition } = useReactFlow();
 
     const onConnect = useCallback(
         (params) => setEdges((eds) => {
@@ -116,6 +120,36 @@ const Canvas = () => {
     //   console.log("offsetX", offsetX);
     //   console.log("offsetY", offsetY);
 
+    const onDragOver = useCallback((event) => {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'move';
+    }, []);
+
+    const onDropSrc = (event) => {
+        event.preventDefault();
+
+        // check if the dropped element is valid
+        if (Object.keys(srcDrop).length === 0) {
+            return;
+        }
+
+        const position = screenToFlowPosition({
+            x: event.clientX,
+            y: event.clientY,
+        });
+        setNodes((prevNds) => {
+            const tempSrc = {
+                ...srcDrop,
+                position,
+                id: (Math.floor(Math.random() * 10000) + 10000).toString().substring(1),
+            }
+            return [
+                ...prevNds,
+                tempSrc
+            ]
+        });
+    };
+
     useEffect(() => {
         // highlightMock
         if (highlightMock.length > 0) {
@@ -139,7 +173,7 @@ const Canvas = () => {
 
     useEffect(() => {
         if (newNodeType.type) {
-            const randomId  = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+            const randomId = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
             setNodes((prevNds) => {
                 const tempNd = {
                     id: randomId,
@@ -153,21 +187,21 @@ const Canvas = () => {
                 ]
             });
             setEdges((prevEds) => {
-                const tempEdg =   {
+                const tempEdg = {
                     id: `e${newNodeType.srcId}-${randomId}`,
                     source: newNodeType.srcId,
                     target: randomId,
                     markerEnd: {
-                      type: MarkerType.ArrowClosed,
-                      width: 20,
-                      height: 20,
-                      color: 'black',
+                        type: MarkerType.ArrowClosed,
+                        width: 20,
+                        height: 20,
+                        color: 'black',
                     },
                     style: {
-                      strokeWidth: 1,
-                      stroke: "black"
+                        strokeWidth: 1,
+                        stroke: "black"
                     },
-                  };
+                };
                 return [
                     ...prevEds,
                     tempEdg
@@ -186,6 +220,8 @@ const Canvas = () => {
                 onConnect={onConnect}
                 nodeTypes={nodeTypes}
                 style={canvasStyle}
+                onDragOver={onDragOver}
+                onDrop={onDropSrc}
             >
                 <Controls />
                 <MiniMap />

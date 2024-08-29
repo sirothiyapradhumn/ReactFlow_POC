@@ -10,6 +10,8 @@ const CanvasContext = createContext({
   onEdgesChange: () => { },
   newNodeType: {},
   setNewNodeType: () => { },
+  srcDrop: {},
+  setSrcDrop: () => { },
 });
 
 const initialNodes = [
@@ -162,6 +164,7 @@ export const CanvasContextProvider = ({ children }) => {
     position: {},
     srcId: '',
   });
+  const [srcDrop, setSrcDrop] =useState({});
 
   const value = useMemo(() => ({
     nodes,
@@ -172,6 +175,8 @@ export const CanvasContextProvider = ({ children }) => {
     onEdgesChange,
     newNodeType,
     setNewNodeType,
+    srcDrop,
+    setSrcDrop,
   }), [
     nodes,
     setNodes,
@@ -181,6 +186,8 @@ export const CanvasContextProvider = ({ children }) => {
     onEdgesChange,
     newNodeType,
     setNewNodeType,
+    srcDrop,
+    setSrcDrop,
   ]);
 
   return <CanvasContext.Provider value={value}>

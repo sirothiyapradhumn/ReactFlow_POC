@@ -5,7 +5,7 @@ import { allFlowList, allSources } from './mock';
 import { useReactFlow } from '@xyflow/react';
 
 const LeftNav = () => {
-    const { nodes, setNodes, setEdges } = useContext(CanvasContext);
+    const { nodes, setNodes, setEdges, setSrcDrop } = useContext(CanvasContext);
     const { screenToFlowPosition } = useReactFlow();
     const yPos = useRef(500);
 
@@ -37,23 +37,28 @@ const LeftNav = () => {
         setEdges(flow.edges);
     };
 
-    const onSourceDrag = (event, src) => {
-        const position = screenToFlowPosition({
-            x: event.clientX,
-            y: event.clientY,
-          });
-        setNodes((prevNds) => {
-            const tempSrc = {
-                ...src,
-                position,
-                id: (Math.floor(Math.random() * 10000) + 10000).toString().substring(1),
-            }
-            return [
-                ...prevNds,
-                tempSrc
-            ]
-        });
-    };
+    // const onSourceDrag = (event, src) => {
+    //     const position = screenToFlowPosition({
+    //         x: event.clientX,
+    //         y: event.clientY,
+    //       });
+    //     setNodes((prevNds) => {
+    //         const tempSrc = {
+    //             ...src,
+    //             position,
+    //             id: (Math.floor(Math.random() * 10000) + 10000).toString().substring(1),
+    //         }
+    //         return [
+    //             ...prevNds,
+    //             tempSrc
+    //         ]
+    //     });
+    // };
+
+    const onSourceDragStart = (event, src) => {
+        setSrcDrop(src);
+        event.dataTransfer.effectAllowed = 'move';
+      };
 
     return (
         <div className={styles.leftHeader}>
@@ -102,7 +107,8 @@ const LeftNav = () => {
                                 key={ele.id}
                                 className={styles.nodeName}
                                 draggable="true"
-                                onDragEnd={(e) => onSourceDrag(e, ele)}
+                                // onDragEnd={(e) => onSourceDrag(e, ele)}
+                                onDragStart={(e) => onSourceDragStart(e, ele)}
                             >
                                 {ele.data.label}
                             </div>
