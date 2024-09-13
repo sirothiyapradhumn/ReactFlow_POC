@@ -42,13 +42,13 @@
 }
 
 .autoArr {
-    color: black;
-    background-color: #effaff;
+    color: gray;
+    background-color: white;
     height: 30px;
     font-size: 14px;
     font-weight: 500;
     padding: 0 5px;
-    border: 1px solid black;
+    border: 1px solid gray;
     cursor: pointer;
     border-radius: 2px;
     white-space: nowrap;
@@ -56,4 +56,8 @@
     align-items: center;
     justify-content: center;
     max-width: 100px;
+}
+.autoArr:hover {
+    color: black;
+    border: 1px solid black;
 }
