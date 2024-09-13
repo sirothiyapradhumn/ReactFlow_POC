@@ -83,12 +83,13 @@ const LeftNav = () => {
 
     return (
         <div className={styles.leftHeader}>
-            <div>
-                <button
+            <div className={styles.featuresBtnsContainer}>
+                <div
+                    className={styles.autoArr}
                     onClick={applyAutoLayout}
                 >
                     Auto Arrange
-                </button>
+                </div>
             </div>
             <div className={styles.gotoHead}>Go to Step</div>
             <div className={styles.listBox}>

@@ -36,3 +36,22 @@
 .actBtn {
     cursor: pointer;
 }
+
+.featuresBtnsContainer {
+    padding-bottom: 10px;
+}
+
+.autoArr {
+    color: black;
+    background-color: #effaff;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 2px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
