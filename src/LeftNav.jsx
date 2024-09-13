@@ -3,6 +3,7 @@ import styles from './index.module.css';
 import CanvasContext from './context/CanvasContext';
 import { allFlowList, allSources } from './mock';
 import { useReactFlow } from '@xyflow/react';
+import elkLayout from './graph';
 
 const LeftNav = () => {
     const { nodes, setNodes, setEdges, setSrcDrop } = useContext(CanvasContext);
@@ -58,10 +59,27 @@ const LeftNav = () => {
     const onSourceDragStart = (event, src) => {
         setSrcDrop(src);
         event.dataTransfer.effectAllowed = 'move';
-      };
+    };
+
+    const applyAutoLayout = () => {
+        elkLayout({ initialNodes: nodes, initialEdges: edges }).then((graph) => {
+            console.log(graph);
+            // setNodes(nodesForFlow(graph));
+            // setEdges(edgesForFlow(graph));
+            const durationTime = 400;
+            fitView({ duration: durationTime });
+          });
+    }
 
     return (
         <div className={styles.leftHeader}>
+            <div>
+                <button
+                    onClick={applyAutoLayout}
+                >
+                    Auto Arrange
+                </button>
+            </div>
             <div className={styles.gotoHead}>Go to Step</div>
             <div className={styles.listBox}>
                 {
