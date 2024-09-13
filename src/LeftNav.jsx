@@ -6,8 +6,8 @@ import { useReactFlow } from '@xyflow/react';
 import elkLayout from './graph';
 
 const LeftNav = () => {
-    const { nodes, setNodes, setEdges, setSrcDrop } = useContext(CanvasContext);
-    const { screenToFlowPosition } = useReactFlow();
+    const { nodes, setNodes, edges, setEdges, setSrcDrop } = useContext(CanvasContext);
+    const { screenToFlowPosition, fitView } = useReactFlow();
     const yPos = useRef(500);
 
     const onStepClick = (nodeId) => {
@@ -62,13 +62,23 @@ const LeftNav = () => {
     };
 
     const applyAutoLayout = () => {
+        const nodesForFlow = (graph) => {
+            return [
+                ...graph.children.map((node) => {
+                    return {
+                        ...nodes.find((n) => n.id === node.id),
+                        position: { x: node.x, y: node.y },
+                    };
+                }),
+            ];
+        };
         elkLayout({ initialNodes: nodes, initialEdges: edges }).then((graph) => {
             console.log(graph);
-            // setNodes(nodesForFlow(graph));
-            // setEdges(edgesForFlow(graph));
-            const durationTime = 400;
+            setNodes(nodesForFlow(graph));
+            setEdges(graph.edges);
+            const durationTime = 200;
             fitView({ duration: durationTime });
-          });
+        });
     }
 
     return (

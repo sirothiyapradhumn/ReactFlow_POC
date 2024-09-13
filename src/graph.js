@@ -1,18 +1,14 @@
 /* istanbul ignore file */
 import ELK from 'elkjs';
-import { Worker as ElkWorker } from './package-patch/react-friendly-elk-worker.min';
+// import { Worker as ElkWorker } from './package-patch/react-friendly-elk-worker.min';
 
-const elk = new ELK({
-  workerFactory(url) {
-    return new ElkWorker(url);
-  },
-});
+const elk = new ELK();
 const elkLayout = (params) => {
   const { initialNodes = [], initialEdges = [] } = params;
   const nodesForElk = initialNodes.map((node) => {
     return {
       id: node.id,
-      height: 50,
+      height: 200,
     };
   });
   const graph = {
